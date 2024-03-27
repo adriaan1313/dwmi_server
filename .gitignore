@@ -1,0 +1,5 @@
+static/tardis/
+static/keys/binaryData/
+*_debug.swf
+node_modules/
+package-lock.json
