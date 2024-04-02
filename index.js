@@ -117,6 +117,21 @@ sockPolicy = `<?xml version="1.0"?>
 </cross-domain-policy>`;
 
 
+const messageColours = {
+	"warn": "\x1b[33m",
+	"error": "\x1b[31m",
+	"info": "\x1b[34m",
+	"debug": "\x1b[32m",
+	"fatal": "\x1b[37m\x1b[41m", 
+	"trace": "\x1b[36m"
+	
+};
+
+
+
+
+
+
 let XmlSPS = new XMLSocket.SocketPolicyFileServer([], sockPolicy);
 
 let XmlSock = new XMLSocket.Server({host:"localhost", port: 4444}, socket=>{
@@ -136,7 +151,27 @@ let XmlSock = new XMLSocket.Server({host:"localhost", port: 4444}, socket=>{
 		console.log("connectionAttemptFailed event: ", args);
 	});
 	socket.on("data", data=>{
-		console.log("data event: ", data.toString());
+		const messages = data.toString().split("!SOS");
+		messages.shift();
+		messages.forEach(message=>{
+			//console.log(message)
+			const messageType = message.split('<')[1].split(' ')[0];
+			
+			//console.log(messageType);
+			if(messageType == "showMessage"){
+				const key = message.split("key='")[1].split("'")[0];
+				const contents = message.split("'>")[1].split("</showMessage>")[0];
+				const colStr = messageColours[key]||"";
+				
+				
+				console.log(colStr+contents+"\x1b[0m");
+				
+				
+			}else console.log("SOS message:", message);
+		});
+		
+		
+		//console.log("data event: ", data.toString());
 	});
 	socket.on("drain", (...args)=>{
 		console.log("drain event: ", args);
