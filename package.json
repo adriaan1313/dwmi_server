@@ -12,6 +12,7 @@
     "amf-codec": "^1.4.0",
     "amf-packet": "^1.0.2",
     "express": "^4.18.2",
-    "utf8": "^3.0.0"
+    "utf8": "^3.0.0",
+    "xmlsocket": "github:adriaan1313/xmlsocket"
   }
 }
