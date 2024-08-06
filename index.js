@@ -167,6 +167,16 @@ let XmlSock = new XMLSocket.Server({host:"localhost", port: 4444}, socket=>{
 				console.log(colStr+contents+"\x1b[0m");
 				
 				
+			} else if(messageType == "showFoldMessage"){
+				const key = message.split("key='")[1].split("'")[0];
+				const contents = message.split("<message>")[1].split("</message>")[0];
+				const title = message.split("<title>")[1].split("</title>")[0];
+				const colStr = messageColours[key]||"";
+				console.log();
+				console.log(colStr+"\033[7m\033[1m"+title+"\x1b[0m");
+				console.log(colStr+contents+"\x1b[0m");
+				console.log();
+				
 			}else console.log("SOS message:", message);
 		});
 		
