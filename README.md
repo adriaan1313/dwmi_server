@@ -5,7 +5,7 @@ There are two main parts:
 * The Gateway = actually needed for the game to run
 * SOS = some fun debug output
 
-Vortex Run, Match and Escape the Silence don't need the server.
+Match and Escape the Silence don't need the server.
 
 I have included one (1) modded swf, all others are the original ones, pulled from the web archive.
 
